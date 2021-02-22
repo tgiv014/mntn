@@ -56,6 +56,7 @@ async function procPosts(postdir, rootpath='/blog', postpath='/post', template='
 }
 
 export default {
+  basePath: 'mntn',
   getRoutes: async () => {
     const postRoutes = await procPosts('./posts')
     const projectRoutes = await procPosts('./projects', '/', '/project')

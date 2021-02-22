@@ -12,9 +12,10 @@ import chokidar from 'chokidar'
 const yaml = require('yaml').parse
 
 let canRebuild = false;
-
-chokidar.watch('./posts').on('all', () =>{if(canRebuild){rebuildRoutes()}})
-chokidar.watch('./projects').on('all', () =>{if(canRebuild){rebuildRoutes()}})
+if (process.env.NODE_ENV === 'development') {
+  chokidar.watch('./posts').on('all', () =>{if(canRebuild){rebuildRoutes()}})
+  chokidar.watch('./projects').on('all', () =>{if(canRebuild){rebuildRoutes()}})
+}
 
 async function procPosts(postdir, rootpath='/blog', postpath='/post', template='src/containers/Post') {
   const posts = await fs.readdir(postdir)

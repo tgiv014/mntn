@@ -12,11 +12,13 @@ import chokidar from 'chokidar'
 const yaml = require('yaml').parse
 
 let canRebuild = false;
+// If we set up directory-watching outside of dev, we'll freeze at the end of every build
 if (process.env.NODE_ENV === 'development') {
   chokidar.watch('./posts').on('all', () =>{if(canRebuild){rebuildRoutes()}})
   chokidar.watch('./projects').on('all', () =>{if(canRebuild){rebuildRoutes()}})
 }
 
+// Used to process a directory full of markdown files
 async function procPosts(postdir, rootpath='/blog', postpath='/post', template='src/containers/Post') {
   const posts = await fs.readdir(postdir)
   const post_data = posts.map(post => {

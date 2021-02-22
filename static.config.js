@@ -19,9 +19,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Used to process a directory full of markdown files
-async function procPosts(postdir, rootpath='/blog', postpath='/post', template='src/containers/Post') {
+async function procPosts(postdir, rootpath='/blog', postpath='/post', template='src/containers/Post', sort_date=true) {
   const posts = await fs.readdir(postdir)
-  const post_data = posts.map(post => {
+  let post_data = posts.map(post => {
     const raw = fs.readFileSync(path.join(postdir, post), "utf-8")
     const res = remark()
           .use(recommended)
@@ -36,6 +36,9 @@ async function procPosts(postdir, rootpath='/blog', postpath='/post', template='
       stripped: path.parse(post).name
     }
   })
+  if(sort_date){
+    post_data = post_data.sort((a,b) => (new Date(b.data.date)-new Date(a.data.date)))
+  }
   const routeData = {
     path: rootpath,
     getData: () => ({ posts:post_data }),

@@ -7,6 +7,7 @@ import rust from 'highlight.js/lib/languages/rust';
 import go from 'highlight.js/lib/languages/go';
 import markdown from 'highlight.js/lib/languages/markdown';
 import python from 'highlight.js/lib/languages/python';
+import GitHub from 'components/GitHub';
 
 hljs.registerLanguage('javascript', javascript)
 hljs.registerLanguage('rust', rust)
@@ -23,6 +24,10 @@ export default function Project() {
       hljs.highlightBlock(block);
     });
   })
+  const github_panel = post.data.github ? (
+    <GitHub repos={post.data.github} />
+  ) : null;
+
   return (
     <div>
       <div className="backline">
@@ -30,7 +35,7 @@ export default function Project() {
         <h1>{post.data.title}</h1>
       </div>
       <div dangerouslySetInnerHTML={ html } />
-      <br />
+      {github_panel}
     </div>
   )
 }

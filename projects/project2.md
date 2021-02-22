@@ -2,7 +2,7 @@
 title: A docker project
 featured: true
 description: So many containers!
-bg: "/texture.png"
+color: "#F7B32B"
 ---
 
 ## I lied! There's nothing about docker in here!

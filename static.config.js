@@ -58,7 +58,7 @@ async function procPosts(postdir, rootpath='/blog', postpath='/post', template='
 export default {
   getRoutes: async () => {
     const postRoutes = await procPosts('./posts')
-    const projectRoutes = await procPosts('./projects', '/', '/project')
+    const projectRoutes = await procPosts('./projects', '/', '/project', 'src/containers/Project')
     canRebuild = true
     return [
       postRoutes,

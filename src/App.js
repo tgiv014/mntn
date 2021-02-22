@@ -45,7 +45,7 @@ function App() {
             <div className="footer-col">
               <ul className="dotless-list">
                 <li>mntn.dev</li>
-                <li>© Thomas Gorham 2021</li>
+                <li>Thomas Gorham 2021</li>
               </ul>
             </div>
             <div className="footer-col">

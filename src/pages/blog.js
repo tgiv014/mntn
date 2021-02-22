@@ -17,7 +17,7 @@ export default function Blog() {
               <h2>
                 <Link to={`/blog/post/${post.stripped}/`}>{post.data.title}</Link>
               </h2>
-              <em><p>{d.toDateString()}</p></em> 
+              <em>{d.toDateString()}</em> 
             </li>
           )
         })}

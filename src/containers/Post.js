@@ -23,12 +23,15 @@ export default function Post() {
       hljs.highlightBlock(block);
     });
   })
+  const d = new Date(data.post.data.date)
   return (
     <div>
       <div className="backline">
         <Link to="/blog/"><h1>{'<'}</h1></Link>
         <h1>{data.post.data.title}</h1>
       </div>
+      <br />
+      <em>{d.toDateString()}</em>
       <div dangerouslySetInnerHTML={ data.html } />
       <br />
     </div>

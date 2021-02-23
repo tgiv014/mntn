@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 15.8
+      - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          node-version: '15.8'
+          node-version: '12.x'
       - name: Install Packages
         run: npm install
       - name: Build page

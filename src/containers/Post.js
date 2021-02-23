@@ -18,23 +18,22 @@ hljs.registerLanguage('bash', bash)
 // import './monokai.css'
 
 export default function Post() {
-  const data = useRouteData()
+  const { post, html } = useRouteData()
 
   useEffect(() => {
     document.querySelectorAll('pre code').forEach((block) => {
       hljs.highlightBlock(block);
     });
   })
-  const d = new Date(data.post.data.date)
   return (
     <div>
       <div className="backline">
         <Link to="/blog/"><h1>{'<'}</h1></Link>
-        <h1>{data.post.data.title}</h1>
+        <h1>{post.data.title}</h1>
       </div>
       <br />
-      <em>{d.toDateString()}</em>
-      <div dangerouslySetInnerHTML={ data.html } />
+      <em>{post.dateString}</em>
+      <div dangerouslySetInnerHTML={ html } />
       <br />
     </div>
   )

@@ -29,15 +29,18 @@ async function procPosts(postdir, rootpath='/blog', postpath='/post', template='
           .use(frontmatter)
           .use(extractor, { yaml: yaml })
           .processSync(raw)
+    const date = new Date(res.data.date)
     return {
       fname: post,
       data: res.data,
       md: String(res),
-      stripped: path.parse(post).name
+      stripped: path.parse(post).name,
+      date: date,
+      dateString: date.toDateString()
     }
   })
   if(sort_date){
-    post_data = post_data.sort((a,b) => (new Date(b.data.date)-new Date(a.data.date)))
+    post_data = post_data.sort((a,b) => (b.date-a.date))
   }
   const routeData = {
     path: rootpath,

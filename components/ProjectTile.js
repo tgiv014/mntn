@@ -1,12 +1,11 @@
 import React from 'react'
-
-import { Link, Router } from 'components/Router'
+import Link from 'next/link'
 
 export default (props) => {
     const backgroundcolor = (props.bg_color ? props.bg_color : '#638475')
     const style = {
         "background": (props.bg ? ('url('+props.bg+'), no-repeat, '+backgroundcolor) : backgroundcolor),
-        "background-size": 'cover',
+        "backgroundSize": 'cover',
     }
     const project_tile = (
         <div className="project-tile" style={style}>
@@ -15,13 +14,5 @@ export default (props) => {
             <p>{ props.description }</p>
         </div>
     )
-    if (props.to) {
-        return (
-            <Link to={props.to}>
-                {project_tile}
-            </Link>
-        )
-    }else {
-        return project_tile;
-    }
+    return project_tile
 }

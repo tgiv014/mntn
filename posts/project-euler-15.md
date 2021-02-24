@@ -18,9 +18,8 @@ The easiest, and probably fastest, way to solve this problem is to just use math
 Based on these rules, you can build a valid path by starting with an empty list of *2N* steps, selecting *N* steps to place a rightward move, and filling the remaining steps with downward moves. This is a [Combination Problem](https://en.wikipedia.org/wiki/Combination)! The number of valid paths you can possibly construct is *2N choose N*.
 
 # A Fun Way
-<center>
-<img src="/img/treediagram.png"/>
-</center>
+![Tree Diagram](/img/treediagram.png)
+
 Maybe you're itching for a reason to think about binary trees. You can look at every step in a path as a node in a binary tree. The starting position is the root node. The root node has two child nodes, one for a downward move and one for a rightward move. Each of those nodes have their own children in the same pattern. This means that two of the "grandchild" nodes actually describe different paths to the same point. In the above picture, downward moves are to the left and rightward to the right.
 
 Using this tree, we can describe any path on an infinite grid. To constrain the grid (and know when we've reached the end point), we need to add some state to each node: an x and y position: (x,y). To create a new downward node in our domain, y must be less than *N* - the new node's y value will be increased by 1. To create a new rightward node, x must be less than *N* - we'll increase the node's x. If a new node has state *x == N* and *y == N*, we've hit the end point of the grid!

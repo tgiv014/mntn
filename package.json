@@ -14,10 +14,8 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "remark": "^13.0.0",
-    "remark-extract-frontmatter": "^3.1.0",
-    "remark-frontmatter": "^3.0.0",
-    "remark-html": "^13.0.1",
     "remark-preset-lint-recommended": "^5.0.0",
+    "remark-react": "^8.0.0",
     "sass": "^1.32.8",
     "yaml": "^1.10.0"
   }

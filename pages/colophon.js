@@ -2,7 +2,7 @@ import Head from 'next/head'
 import React from 'react'
 
 export async function getStaticProps() {
-    const buildString = (new Date()).toTimeString()
+    const buildString = String(new Date())
     return {
         props: {
             buildString

@@ -1,23 +1,11 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 
-import remark from 'remark'
-import recommended from 'remark-preset-lint-recommended'
-import remark2react from 'remark-react'
-import hljs from 'highlight.js/lib/core'
-import javascript from 'highlight.js/lib/languages/javascript';
-import rust from 'highlight.js/lib/languages/rust';
-import go from 'highlight.js/lib/languages/go';
-import markdown from 'highlight.js/lib/languages/markdown';
-import python from 'highlight.js/lib/languages/python';
-import bash from 'highlight.js/lib/languages/bash';
-
-hljs.registerLanguage('javascript', javascript)
-hljs.registerLanguage('rust', rust)
-hljs.registerLanguage('go', go)
-hljs.registerLanguage('markdown', markdown)
-hljs.registerLanguage('python', python)
-hljs.registerLanguage('bash', bash)
+import unified from 'unified';
+import markdown from 'remark-parse';
+import remark2rehype from 'remark-rehype';
+import highlight from 'rehype-highlight';
+import rehype2react from 'rehype-react';
 
 function Image({src}) {
     return (
@@ -43,25 +31,23 @@ function MdLink({ children, href }) {
       );
 }
 
-export default (props) => {
-    const res = remark()
-        .use(recommended)
-        .use(remark2react, {
-            remarkReactComponents: {
-                img: Image,
-                a: MdLink
-            }
-        })
-        .processSync(props.markdown)
+let processor = unified()
+        .use(markdown)
+        .use(remark2rehype)
+        .use(highlight)
+        .use(rehype2react,
+            {
+                createElement: React.createElement,
+                components: {
+                    a: MdLink,
+                    img: Image
+                }
+            })
 
-    useEffect(() => {
-        document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightBlock(block);
-        });
-    })
+export default (props) => {
     return (
         <div className="markdown-container">
-            {res.result}
+            {processor.processSync(props.markdown).result}
         </div>
     )
 }
